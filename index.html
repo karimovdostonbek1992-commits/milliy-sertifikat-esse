@@ -3,60 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EsseLab Pro - Rasmiy Tahlil</title>
+    <title>EsseLab Pro - Ekspert Tahlili</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap');
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #05070a; color: white; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #05070a; color: white; scroll-behavior: smooth; }
         .glass { background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.05); }
         .input-style { background: #0f172a; border: 1px solid #1e293b; color: #e2e8f0; transition: all 0.3s; }
         .input-style:focus { border-color: #6366f1; box-shadow: 0 0 15px rgba(99, 102, 241, 0.2); outline: none; }
+        .criterion-card { border-left: 4px solid #6366f1; background: rgba(99, 102, 241, 0.05); }
     </style>
 </head>
 <body class="min-h-screen p-4 md:p-10">
-    <div class="max-w-5xl mx-auto">
-        <div class="mb-10 text-center">
-            <h1 class="text-4xl font-extrabold tracking-tighter text-indigo-500 mb-2">ESSE.LAB PRO</h1>
-            <p class="text-slate-400 text-sm uppercase tracking-widest">Ekspert darajasidagi baholash tizimi</p>
+    <div class="max-w-6xl mx-auto">
+        <div class="mb-10 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div>
+                <h1 class="text-4xl font-extrabold tracking-tighter text-indigo-500">ESSE.LAB PRO</h1>
+                <p class="text-slate-400 text-xs uppercase tracking-[0.3em]">Milliy Sertifikat Standarti</p>
+            </div>
+            <div class="flex gap-4">
+                <div class="text-right">
+                    <p class="text-slate-500 text-[10px] uppercase font-bold">Maksimal Ball</p>
+                    <p class="text-2xl font-black text-white">15 BALL</p>
+                </div>
+            </div>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <div class="lg:col-span-2 space-y-6">
-                <div class="glass p-8 rounded-[2rem] shadow-2xl">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <div class="lg:col-span-8 space-y-6">
+                <div class="glass p-8 rounded-[2.5rem] shadow-2xl">
                     <div class="mb-6">
                         <label class="block text-slate-400 text-xs font-bold uppercase mb-2 ml-1">Esse Mavzusi</label>
-                        <input id="topicInput" type="text" class="input-style w-full p-4 rounded-xl text-md" placeholder="Masalan: Kitobxonlikning foydalari...">
+                        <input id="topicInput" type="text" class="input-style w-full p-4 rounded-xl text-md" placeholder="Esse mavzusini kiriting...">
                     </div>
 
                     <div class="mb-6">
                         <label class="block text-slate-400 text-xs font-bold uppercase mb-2 ml-1">Esse Matni</label>
-                        <textarea id="essayInput" class="input-style w-full h-80 p-6 rounded-2xl text-lg resize-none" placeholder="Esseingizni shu yerga yozing yoki joylashtiring..."></textarea>
+                        <textarea id="essayInput" class="input-style w-full h-96 p-6 rounded-2xl text-lg resize-none" placeholder="Esse matnini bu yerga joylang..."></textarea>
                     </div>
                     
-                    <button id="checkBtn" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-5 rounded-2xl transition-all flex items-center justify-center gap-3 shadow-xl shadow-indigo-500/10 active:scale-95 text-lg">
+                    <button id="checkBtn" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-5 rounded-2xl transition-all flex items-center justify-center gap-4 active:scale-95 text-xl shadow-xl shadow-indigo-600/20">
                         <span>TAHLILNI BOSHLASH</span>
-                        <i class="fas fa-microchip"></i>
+                        <i class="fas fa- goggles"></i>
                     </button>
+                </div>
+
+                <div id="resultBox" class="hidden glass p-8 rounded-[2.5rem] border-t-4 border-indigo-500 animate-fadeIn">
+                    <div class="flex items-center justify-between mb-8 border-b border-white/10 pb-4">
+                        <h2 class="text-2xl font-bold flex items-center gap-3">
+                            <i class="fas fa-file-contract text-indigo-500"></i> Ekspert Xulosasi
+                        </h2>
+                        <button onclick="window.print()" class="text-slate-400 hover:text-white transition-colors">
+                            <i class="fas fa-print"></i>
+                        </button>
+                    </div>
+                    <div id="resultContent" class="text-slate-200 leading-relaxed space-y-4">
+                        </div>
                 </div>
             </div>
 
-            <div class="lg:col-span-1">
-                <div id="statusCard" class="glass p-8 rounded-[2rem] min-h-[400px] flex flex-col justify-center text-center border-dashed border-slate-800">
-                    <div id="idleState">
-                        <div class="w-16 h-16 bg-slate-900 rounded-full flex items-center justify-center mx-auto mb-4 border border-slate-800">
-                            <i class="fas fa-terminal text-indigo-500"></i>
+            <div class="lg:col-span-4 space-y-6">
+                <div class="glass p-6 rounded-[2rem]">
+                    <h3 class="text-sm font-black text-white uppercase mb-6 tracking-widest flex items-center gap-2">
+                        <i class="fas fa-list-check text-indigo-500"></i> Baholash Mezonlari
+                    </h3>
+                    <div class="space-y-4 text-xs">
+                        <div class="criterion-card p-3 rounded-r-xl">
+                            <p class="font-bold text-indigo-400">1. Mavzu (4 ball)</p>
+                            <p class="text-slate-500 mt-1">Mavzuning to'liq ochilishi va dalillar keltirilishi.</p>
                         </div>
-                        <p class="text-slate-500 font-medium">Mavzu va matnni kiriting, so'ngra tahlilni bosing</p>
-                    </div>
-
-                    <div id="loader" class="hidden">
-                        <div class="w-12 h-12 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-                        <p class="text-indigo-400 font-bold animate-pulse">EKSPERT TAHLIL QILMOQDA...</p>
-                    </div>
-
-                    <div id="result" class="hidden text-left overflow-y-auto max-h-[600px] pr-2">
+                        <div class="criterion-card p-3 rounded-r-xl">
+                            <p class="font-bold text-indigo-400">2. Mantiqiylik (3 ball)</p>
+                            <p class="text-slate-500 mt-1">Fikrlar izchilligi va paragraflar bog'liqligi.</p>
                         </div>
+                        <div class="criterion-card p-3 rounded-r-xl">
+                            <p class="font-bold text-indigo-400">3. Imlo (3 ball)</p>
+                            <p class="text-slate-500 mt-1">Harfiy xatolar va lug'at boyligi.</p>
+                        </div>
+                        <div class="criterion-card p-3 rounded-r-xl">
+                            <p class="font-bold text-indigo-400">4. Punktuatsiya (2 ball)</p>
+                            <p class="text-slate-500 mt-1">Tinish belgilarining to'g'ri qo'llanilishi.</p>
+                        </div>
+                        <div class="criterion-card p-3 rounded-r-xl">
+                            <p class="font-bold text-indigo-400">5. Uslub (3 ball)</p>
+                            <p class="text-slate-500 mt-1">Akademik til va gap tuzilishidagi mahorat.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="loader" class="hidden glass p-8 rounded-[2rem] text-center">
+                    <div class="w-12 h-12 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+                    <p class="text-indigo-400 font-bold animate-pulse text-sm">KAMCHILIKLAR TAHLIL QILINMOQDA...</p>
                 </div>
             </div>
         </div>
@@ -71,49 +109,44 @@
         const checkBtn = document.getElementById('checkBtn');
         const topicInput = document.getElementById('topicInput');
         const essayInput = document.getElementById('essayInput');
-        const resultDiv = document.getElementById('result');
+        const resultBox = document.getElementById('resultBox');
+        const resultContent = document.getElementById('resultContent');
         const loader = document.getElementById('loader');
-        const idleState = document.getElementById('idleState');
 
         checkBtn.addEventListener('click', async () => {
             const topic = topicInput.value.trim();
             const text = essayInput.value.trim();
 
             if (!topic || text.length < 50) {
-                alert("Iltimos, mavzuni kiriting va kamida 50 ta so'zdan iborat matn yozing!");
+                alert("Mavzuni kiriting va kamida 50 ta so'z yozing!");
                 return;
             }
 
-            idleState.classList.add('hidden');
-            resultDiv.classList.add('hidden');
+            resultBox.classList.add('hidden');
             loader.classList.remove('hidden');
             checkBtn.disabled = true;
 
             try {
                 const model = genAI.getGenerativeModel({ 
                     model: "gemini-1.5-flash",
-                    systemInstruction: "Sen O'zbekiston Milliy sertifikat imtihoni (Ona tili) bo'yicha yuqori malakali ekspertsan. Foydalanuvchi bergan MAVZUga matn qanchalik mosligini 4 ballik tizimda, qolgan mezonlarni (mantiq, imlo, punktuatsiya, uslub) esa jami 11 ballik tizimda, jami 15 ball asosida qat'iy tekshir."
+                    systemInstruction: "Sen O'zbekiston Milliy sertifikat (Ona tili) ekspertsan. Esse tahlilida quyidagi strukturaga qat'iy amal qil: 1. Har bir mezon bo'yicha ballar jadvali. 2. KAMCHILIKLAR (Matndagi xatolarni bittalab ko'rsatib, nima uchun xato ekanligini tushuntir). 3. TAVSIYALAR (Ballni oshirish uchun nima qilish kerakligini ayt). Juda qat'iy tahlil qil."
                 });
 
-                const prompt = `Mavzu: ${topic}\n\nEsse matni: ${text}`;
+                const prompt = `Mavzu: ${topic}\nEsse: ${text}`;
                 const result = await model.generateContent(prompt);
                 const response = await result.response;
                 
-                resultDiv.innerHTML = `
-                    <div class="flex items-center gap-2 text-green-500 font-bold mb-4 border-b border-slate-800 pb-2">
-                        <i class="fas fa-check-double text-sm"></i> TAHLIL YAKUNLANDI
-                    </div>
-                    <div class="text-slate-300 text-md leading-relaxed">
-                        ${response.text().replace(/\n/g, '<br>').replace(/\*\*(.*?)\*\*/g, '<strong class="text-white">$1</strong>')}
-                    </div>
-                `;
+                resultContent.innerHTML = response.text()
+                    .replace(/\n/g, '<br>')
+                    .replace(/\*\*(.*?)\*\*/g, '<b class="text-indigo-400">$1</b>')
+                    .replace(/### (.*?)(<br>|$)/g, '<h3 class="text-xl font-bold text-white mt-6 mb-2">$1</h3>');
                 
                 loader.classList.add('hidden');
-                resultDiv.classList.remove('hidden');
+                resultBox.classList.remove('hidden');
+                resultBox.scrollIntoView({ behavior: 'smooth' });
             } catch (error) {
-                alert("Xatolik: API ulanishda muammo bo'ldi. Internetni tekshiring.");
+                alert("API xatoligi yuz berdi.");
                 loader.classList.add('hidden');
-                idleState.classList.remove('hidden');
             } finally {
                 checkBtn.disabled = false;
             }
