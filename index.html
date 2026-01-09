@@ -109,49 +109,62 @@
         </div>
     </div>
 
-    <script type="module">
-        import { GoogleGenerativeAI } from "https://esm.run/@google/generative-ai";
+<script type="module">
+    import { GoogleGenerativeAI } from "https://esm.run/@google/generative-ai";
 
-        const API_KEY = "AIzaSyCSjAlYipWXYTUEJnczhpqreOiP3ofG1h0"; 
-        const genAI = new GoogleGenerativeAI(API_KEY);
+    const API_KEY = "AIzaSyCSjAlYipWXYTUEJnczhpqreOiP3ofG1h0"; 
+    const genAI = new GoogleGenerativeAI(API_KEY);
 
-        const checkBtn = document.getElementById('checkBtn');
-        const essayInput = document.getElementById('essayInput');
-        const loader = document.getElementById('loader');
-        const idleState = document.getElementById('idleState');
-        const resultContent = document.getElementById('resultContent');
-        const textContent = document.getElementById('textContent');
+    const checkBtn = document.getElementById('checkBtn');
+    const essayInput = document.getElementById('essayInput');
+    const loader = document.getElementById('loader');
+    const idleState = document.getElementById('idleState');
+    const resultContent = document.getElementById('resultContent');
+    const textContent = document.getElementById('textContent');
 
-        checkBtn.addEventListener('click', async () => {
-            const text = essayInput.value.trim();
-            if (text.length < 50) { alert("Iltimos, yetarli matn kiriting."); return; }
+    checkBtn.addEventListener('click', async () => {
+        const text = essayInput.value.trim();
+        
+        // So'zlar sonini tekshirish (Milliy sertifikat uchun kamida 150-200 so'z tavsiya etiladi)
+        const wordCount = text.split(/\s+/).filter(word => word.length > 0).length;
 
-            idleState.classList.add('hidden');
-            resultContent.classList.add('hidden');
-            loader.classList.remove('hidden');
-            checkBtn.disabled = true;
+        if (wordCount < 50) { 
+            alert("Esse juda qisqa. Iltimos, kamida 50 ta so'z kiriting."); 
+            return; 
+        }
 
-            try {
-                const model = genAI.getGenerativeModel({ 
-                    model: "gemini-1.5-flash",
-                    systemInstruction: "Sen O'zbek tili milliy sertifikat imtihoni ekspertsan. Esseni 15 ballik tizimda qat'iy va ilmiy tahlil qil. Xatolarni bittalab ko'rsat."
-                });
+        idleState.classList.add('hidden');
+        resultContent.classList.add('hidden');
+        loader.classList.remove('hidden');
+        checkBtn.disabled = true;
 
-                const result = await model.generateContent(text);
-                const response = await result.response;
-                
-                textContent.innerHTML = response.text().replace(/\n/g, '<br>').replace(/\*\*(.*?)\*\*/g, '<b class="text-white">$1</b>');
-                
-                loader.classList.add('hidden');
-                resultContent.classList.remove('hidden');
-            } catch (error) {
-                alert("Xatolik yuz berdi. Qayta urinib ko'ring.");
-                idleState.classList.remove('hidden');
-                loader.classList.add('hidden');
-            } finally {
-                checkBtn.disabled = false;
-            }
-        });
-    </script>
+        try {
+            const model = genAI.getGenerativeModel({ 
+                model: "gemini-1.5-flash",
+                systemInstruction: "Sen O'zbekiston Milliy sertifikat imtihoni (Ona tili va adabiyot) bo'yicha qat'iy ekspertsan. Esseni 15 ballik tizimda bahola: Mavzu (4), Mantiq (3), Imlo (3), Punktuatsiya (2), Uslub (3). Har bir xatoni ko'rsat va tavsiyalar ber."
+            });
+
+            const result = await model.generateContent(text);
+            const response = await result.response;
+            const output = response.text();
+            
+            // Markdown formatini HTMLga o'tkazish
+            textContent.innerHTML = output
+                .replace(/\n/g, '<br>')
+                .replace(/\*\*(.*?)\*\*/g, '<b class="text-indigo-400">$1</b>')
+                .replace(/### (.*?)(<br>|$)/g, '<h3 class="text-xl font-bold text-white mt-4">$1</h3>');
+            
+            loader.classList.add('hidden');
+            resultContent.classList.remove('hidden');
+        } catch (error) {
+            console.error(error);
+            alert("Xatolik: API ulanmadi yoki matn juda uzun. Sahifani yangilab qaytadan urinib ko'ring.");
+            idleState.classList.remove('hidden');
+            loader.classList.add('hidden');
+        } finally {
+            checkBtn.disabled = false;
+        }
+    });
+</script>
 </body>
 </html>
