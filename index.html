@@ -3,98 +3,111 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EsseLab Pro - Ekspert Tahlili</title>
+    <title>EsseLab Pro - Milliy Sertifikat Eksperti</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap');
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #05070a; color: white; scroll-behavior: smooth; }
-        .glass { background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.05); }
-        .input-style { background: #0f172a; border: 1px solid #1e293b; color: #e2e8f0; transition: all 0.3s; }
-        .input-style:focus { border-color: #6366f1; box-shadow: 0 0 15px rgba(99, 102, 241, 0.2); outline: none; }
-        .criterion-card { border-left: 4px solid #6366f1; background: rgba(99, 102, 241, 0.05); }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #020617; color: #f8fafc; scroll-behavior: smooth; }
+        .glass { background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.05); }
+        .input-box { background: #0f172a; border: 1px solid #1e293b; color: #e2e8f0; transition: all 0.3s; }
+        .input-box:focus { border-color: #6366f1; box-shadow: 0 0 15px rgba(99, 102, 241, 0.2); outline: none; }
+        .badge { background: rgba(99, 102, 241, 0.1); border: 1px solid rgba(99, 102, 241, 0.2); color: #818cf8; }
     </style>
 </head>
 <body class="min-h-screen p-4 md:p-10">
     <div class="max-w-6xl mx-auto">
-        <div class="mb-10 flex flex-col md:flex-row justify-between items-center gap-4">
+        <header class="flex flex-col md:flex-row justify-between items-center mb-10 gap-6">
             <div>
-                <h1 class="text-4xl font-extrabold tracking-tighter text-indigo-500">ESSE.LAB PRO</h1>
-                <p class="text-slate-400 text-xs uppercase tracking-[0.3em]">Milliy Sertifikat Standarti</p>
+                <h1 class="text-4xl font-black tracking-tighter text-indigo-500">ESSE.LAB PRO</h1>
+                <p class="text-slate-500 text-xs uppercase tracking-[0.4em] font-bold">Assessment System v2.0</p>
             </div>
-            <div class="flex gap-4">
-                <div class="text-right">
-                    <p class="text-slate-500 text-[10px] uppercase font-bold">Maksimal Ball</p>
-                    <p class="text-2xl font-black text-white">15 BALL</p>
+            <div class="flex items-center gap-6 glass px-6 py-3 rounded-2xl">
+                <div class="text-center">
+                    <p class="text-[10px] text-slate-500 uppercase font-bold">Maksimal Ball</p>
+                    <p class="text-xl font-black text-indigo-400">15</p>
+                </div>
+                <div class="w-[1px] h-8 bg-slate-800"></div>
+                <div class="text-center">
+                    <p class="text-[10px] text-slate-500 uppercase font-bold">Standart</p>
+                    <p class="text-xl font-black text-white">MILLIY</p>
                 </div>
             </div>
-        </div>
+        </header>
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
             <div class="lg:col-span-8 space-y-6">
-                <div class="glass p-8 rounded-[2.5rem] shadow-2xl">
+                <div class="glass p-8 rounded-[2.5rem] shadow-2xl border-t border-white/5">
                     <div class="mb-6">
-                        <label class="block text-slate-400 text-xs font-bold uppercase mb-2 ml-1">Esse Mavzusi</label>
-                        <input id="topicInput" type="text" class="input-style w-full p-4 rounded-xl text-md" placeholder="Esse mavzusini kiriting...">
+                        <label class="block text-slate-400 text-[10px] font-black uppercase mb-3 ml-1 tracking-widest">1. Esse Mavzusi</label>
+                        <input id="topicInput" type="text" class="input-box w-full p-4 rounded-xl text-md" placeholder="Masalan: Ona tilining inson hayotidagi o'rni...">
                     </div>
 
                     <div class="mb-6">
-                        <label class="block text-slate-400 text-xs font-bold uppercase mb-2 ml-1">Esse Matni</label>
-                        <textarea id="essayInput" class="input-style w-full h-96 p-6 rounded-2xl text-lg resize-none" placeholder="Esse matnini bu yerga joylang..."></textarea>
+                        <label class="block text-slate-400 text-[10px] font-black uppercase mb-3 ml-1 tracking-widest">2. Esse Matni</label>
+                        <textarea id="essayInput" class="input-box w-full h-[450px] p-6 rounded-2xl text-lg resize-none leading-relaxed" placeholder="Esseingizni shu yerga yozing yoki nusxalab joylang..."></textarea>
                     </div>
                     
-                    <button id="checkBtn" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-5 rounded-2xl transition-all flex items-center justify-center gap-4 active:scale-95 text-xl shadow-xl shadow-indigo-600/20">
+                    <button id="checkBtn" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-5 rounded-2xl transition-all flex items-center justify-center gap-4 active:scale-[0.98] text-xl shadow-2xl shadow-indigo-600/20">
+                        <i class="fas fa-microchip"></i>
                         <span>TAHLILNI BOSHLASH</span>
-                        <i class="fas fa- goggles"></i>
                     </button>
                 </div>
 
-                <div id="resultBox" class="hidden glass p-8 rounded-[2.5rem] border-t-4 border-indigo-500 animate-fadeIn">
-                    <div class="flex items-center justify-between mb-8 border-b border-white/10 pb-4">
-                        <h2 class="text-2xl font-bold flex items-center gap-3">
-                            <i class="fas fa-file-contract text-indigo-500"></i> Ekspert Xulosasi
-                        </h2>
-                        <button onclick="window.print()" class="text-slate-400 hover:text-white transition-colors">
-                            <i class="fas fa-print"></i>
-                        </button>
-                    </div>
-                    <div id="resultContent" class="text-slate-200 leading-relaxed space-y-4">
+                <div id="resultBox" class="hidden glass p-8 rounded-[2.5rem] border-l-4 border-indigo-500">
+                    <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+                        <i class="fas fa-clipboard-check text-green-500"></i> Ekspert Tahlili
+                    </h2>
+                    <div id="resultContent" class="text-slate-300 space-y-6 text-lg">
                         </div>
                 </div>
             </div>
 
             <div class="lg:col-span-4 space-y-6">
-                <div class="glass p-6 rounded-[2rem]">
-                    <h3 class="text-sm font-black text-white uppercase mb-6 tracking-widest flex items-center gap-2">
-                        <i class="fas fa-list-check text-indigo-500"></i> Baholash Mezonlari
-                    </h3>
-                    <div class="space-y-4 text-xs">
-                        <div class="criterion-card p-3 rounded-r-xl">
-                            <p class="font-bold text-indigo-400">1. Mavzu (4 ball)</p>
-                            <p class="text-slate-500 mt-1">Mavzuning to'liq ochilishi va dalillar keltirilishi.</p>
+                <div class="glass p-6 rounded-[2rem] sticky top-10">
+                    <h3 class="text-xs font-black text-slate-400 uppercase mb-6 tracking-widest border-b border-white/5 pb-4">Baholash Mezonlari</h3>
+                    <div class="space-y-4">
+                        <div class="p-4 rounded-2xl bg-white/5 border border-white/5">
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="font-bold text-sm text-white">Mavzu ochilishi</span>
+                                <span class="badge px-2 py-1 rounded-md text-[10px]">4 BALL</span>
+                            </div>
+                            <p class="text-[11px] text-slate-500">Mavzu doirasida fikr yuritish va asosli dalillar keltirish.</p>
                         </div>
-                        <div class="criterion-card p-3 rounded-r-xl">
-                            <p class="font-bold text-indigo-400">2. Mantiqiylik (3 ball)</p>
-                            <p class="text-slate-500 mt-1">Fikrlar izchilligi va paragraflar bog'liqligi.</p>
+                        <div class="p-4 rounded-2xl bg-white/5 border border-white/5">
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="font-bold text-sm text-white">Mantiq va izchillik</span>
+                                <span class="badge px-2 py-1 rounded-md text-[10px]">3 BALL</span>
+                            </div>
+                            <p class="text-[11px] text-slate-500">Fikrlar tartibi va paragraflar orasidagi mantiqiy bog'liqlik.</p>
                         </div>
-                        <div class="criterion-card p-3 rounded-r-xl">
-                            <p class="font-bold text-indigo-400">3. Imlo (3 ball)</p>
-                            <p class="text-slate-500 mt-1">Harfiy xatolar va lug'at boyligi.</p>
+                        <div class="p-4 rounded-2xl bg-white/5 border border-white/5">
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="font-bold text-sm text-white">Imlo va lug'at</span>
+                                <span class="badge px-2 py-1 rounded-md text-[10px]">3 BALL</span>
+                            </div>
+                            <p class="text-[11px] text-slate-500">So'zlarning to'g'ri yozilishi va boy so'z boyligi.</p>
                         </div>
-                        <div class="criterion-card p-3 rounded-r-xl">
-                            <p class="font-bold text-indigo-400">4. Punktuatsiya (2 ball)</p>
-                            <p class="text-slate-500 mt-1">Tinish belgilarining to'g'ri qo'llanilishi.</p>
+                        <div class="p-4 rounded-2xl bg-white/5 border border-white/5">
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="font-bold text-sm text-white">Punktuatsiya</span>
+                                <span class="badge px-2 py-1 rounded-md text-[10px]">2 BALL</span>
+                            </div>
+                            <p class="text-[11px] text-slate-500">Tinish belgilarining o'rinli qo'llanilishi.</p>
                         </div>
-                        <div class="criterion-card p-3 rounded-r-xl">
-                            <p class="font-bold text-indigo-400">5. Uslub (3 ball)</p>
-                            <p class="text-slate-500 mt-1">Akademik til va gap tuzilishidagi mahorat.</p>
+                        <div class="p-4 rounded-2xl bg-white/5 border border-white/5">
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="font-bold text-sm text-white">Uslub</span>
+                                <span class="badge px-2 py-1 rounded-md text-[10px]">3 BALL</span>
+                            </div>
+                            <p class="text-[11px] text-slate-500">Gap qurilishi va uslubiy xatolar mavjud emasligi.</p>
                         </div>
                     </div>
-                </div>
 
-                <div id="loader" class="hidden glass p-8 rounded-[2rem] text-center">
-                    <div class="w-12 h-12 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-                    <p class="text-indigo-400 font-bold animate-pulse text-sm">KAMCHILIKLAR TAHLIL QILINMOQDA...</p>
+                    <div id="loader" class="hidden mt-6 text-center p-6 border-t border-white/5">
+                        <div class="w-10 h-10 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+                        <p class="text-indigo-400 font-bold text-xs animate-pulse uppercase">AI tahlil qilmoqda...</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -118,7 +131,7 @@
             const text = essayInput.value.trim();
 
             if (!topic || text.length < 50) {
-                alert("Mavzuni kiriting va kamida 50 ta so'z yozing!");
+                alert("Iltimos, mavzuni kiriting va matn 50 ta so'zdan kam bo'lmasin!");
                 return;
             }
 
@@ -129,23 +142,25 @@
             try {
                 const model = genAI.getGenerativeModel({ 
                     model: "gemini-1.5-flash",
-                    systemInstruction: "Sen O'zbekiston Milliy sertifikat (Ona tili) ekspertsan. Esse tahlilida quyidagi strukturaga qat'iy amal qil: 1. Har bir mezon bo'yicha ballar jadvali. 2. KAMCHILIKLAR (Matndagi xatolarni bittalab ko'rsatib, nima uchun xato ekanligini tushuntir). 3. TAVSIYALAR (Ballni oshirish uchun nima qilish kerakligini ayt). Juda qat'iy tahlil qil."
+                    systemInstruction: "Sen O'zbekiston Milliy sertifikat (Ona tili) ekspertsan. Esse tahlilida: 1. Har bir 5 ta mezon bo'yicha ball ber. 2. Matndagi xatolarni bittalab 'KAMCHILIKLAR' bo'limida tushuntir. 3. 'TUZATISH' bo'limida xato gaplarning to'g'ri variantini ber. Juda qat'iy va professional tahlil qil."
                 });
 
-                const prompt = `Mavzu: ${topic}\nEsse: ${text}`;
+                const prompt = `Mavzu: ${topic}\n\nEsse: ${text}`;
                 const result = await model.generateContent(prompt);
                 const response = await result.response;
                 
-                resultContent.innerHTML = response.text()
+                let output = response.text()
                     .replace(/\n/g, '<br>')
-                    .replace(/\*\*(.*?)\*\*/g, '<b class="text-indigo-400">$1</b>')
-                    .replace(/### (.*?)(<br>|$)/g, '<h3 class="text-xl font-bold text-white mt-6 mb-2">$1</h3>');
+                    .replace(/\*\*(.*?)\*\*/g, '<strong class="text-indigo-400">$1</strong>')
+                    .replace(/### (.*?)(<br>|$)/g, '<h3 class="text-xl font-bold text-white mt-8 mb-4 border-b border-white/5 pb-2">$1</h3>');
                 
+                resultContent.innerHTML = output;
                 loader.classList.add('hidden');
                 resultBox.classList.remove('hidden');
                 resultBox.scrollIntoView({ behavior: 'smooth' });
             } catch (error) {
-                alert("API xatoligi yuz berdi.");
+                console.error(error);
+                alert("API XATOLIGI! Sababi: " + error.message + "\n\nMaslahat: VPN ishlatib ko'ring yoki API kalitni Google AI Studio'da tekshiring.");
                 loader.classList.add('hidden');
             } finally {
                 checkBtn.disabled = false;
