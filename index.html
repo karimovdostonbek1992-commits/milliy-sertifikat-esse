@@ -3,168 +3,121 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EsseLab Pro — Milliy Sertifikat Standarti</title>
+    <title>EsseLab Pro - Rasmiy Tahlil</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap');
-        
-        body { 
-            font-family: 'Space Grotesk', sans-serif; 
-            background-color: #05070a;
-            color: #e2e8f0;
-            background-image: radial-gradient(circle at top right, #1e1b4b, transparent), radial-gradient(circle at bottom left, #0f172a, transparent);
-        }
-
-        .glass-panel {
-            background: rgba(15, 23, 42, 0.8);
-            backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-        }
-
-        .input-glow:focus {
-            box-shadow: 0 0 20px rgba(99, 102, 241, 0.15);
-            border-color: #6366f1;
-        }
-
-        .expert-font { font-family: 'Playfair Display', serif; }
-        
-        .gradient-text {
-            background: linear-gradient(to right, #818cf8, #c084fc);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #05070a; color: white; }
+        .glass { background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.05); }
+        .input-style { background: #0f172a; border: 1px solid #1e293b; color: #e2e8f0; transition: all 0.3s; }
+        .input-style:focus { border-color: #6366f1; box-shadow: 0 0 15px rgba(99, 102, 241, 0.2); outline: none; }
     </style>
 </head>
-<body class="min-h-screen py-10 px-4">
+<body class="min-h-screen p-4 md:p-10">
     <div class="max-w-5xl mx-auto">
-        <div class="text-center mb-12">
-            <h1 class="text-5xl font-bold mb-3 tracking-tighter gradient-text">ESSE.LAB PRO</h1>
-            <p class="text-slate-400 font-light tracking-widest text-sm uppercase">O'zbek tili milliy sertifikati • Ekspert Tahlili</p>
+        <div class="mb-10 text-center">
+            <h1 class="text-4xl font-extrabold tracking-tighter text-indigo-500 mb-2">ESSE.LAB PRO</h1>
+            <p class="text-slate-400 text-sm uppercase tracking-widest">Ekspert darajasidagi baholash tizimi</p>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div class="lg:col-span-2 space-y-6">
-                <div class="glass-panel p-8 rounded-[2rem]">
-                    <div class="flex items-center gap-3 mb-6">
-                        <div class="w-10 h-10 bg-indigo-500/10 rounded-xl flex items-center justify-center border border-indigo-500/20">
-                            <i class="fas fa-feather-alt text-indigo-400"></i>
-                        </div>
-                        <h2 class="text-xl font-medium text-white">Esse matni</h2>
+                <div class="glass p-8 rounded-[2rem] shadow-2xl">
+                    <div class="mb-6">
+                        <label class="block text-slate-400 text-xs font-bold uppercase mb-2 ml-1">Esse Mavzusi</label>
+                        <input id="topicInput" type="text" class="input-style w-full p-4 rounded-xl text-md" placeholder="Masalan: Kitobxonlikning foydalari...">
+                    </div>
+
+                    <div class="mb-6">
+                        <label class="block text-slate-400 text-xs font-bold uppercase mb-2 ml-1">Esse Matni</label>
+                        <textarea id="essayInput" class="input-style w-full h-80 p-6 rounded-2xl text-lg resize-none" placeholder="Esseingizni shu yerga yozing yoki joylashtiring..."></textarea>
                     </div>
                     
-                    <textarea id="essayInput" 
-                        class="w-full h-80 bg-slate-900/50 border border-slate-700 rounded-2xl p-6 text-slate-300 outline-none transition-all input-glow text-lg leading-relaxed" 
-                        placeholder="Tahlil uchun matnni shu yerga joylashtiring..."></textarea>
-                    
-                    <button id="checkBtn" 
-                        class="w-full mt-6 bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-5 rounded-2xl transition-all shadow-lg shadow-indigo-500/20 flex items-center justify-center gap-3 active:scale-[0.98]">
-                        <span>ANALIZNI BOSHLASH</span>
-                        <i class="fas fa-arrow-right text-sm"></i>
+                    <button id="checkBtn" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-5 rounded-2xl transition-all flex items-center justify-center gap-3 shadow-xl shadow-indigo-500/10 active:scale-95 text-lg">
+                        <span>TAHLILNI BOSHLASH</span>
+                        <i class="fas fa-microchip"></i>
                     </button>
                 </div>
             </div>
 
-            <div class="lg:col-span-1 space-y-6">
-                <div class="glass-panel p-6 rounded-[2rem] border-indigo-500/10">
-                    <h3 class="text-xs font-bold text-slate-500 uppercase mb-4 tracking-widest">Baholash tizimi</h3>
-                    <div class="space-y-3">
-                        <div class="flex justify-between items-center p-3 bg-white/5 rounded-xl border border-white/5">
-                            <span class="text-sm">Mavzu yoritilishi</span>
-                            <span class="text-indigo-400 font-bold">4 ball</span>
-                        </div>
-                        <div class="flex justify-between items-center p-3 bg-white/5 rounded-xl border border-white/5">
-                            <span class="text-sm">Mantiq va uslub</span>
-                            <span class="text-indigo-400 font-bold">6 ball</span>
-                        </div>
-                        <div class="flex justify-between items-center p-3 bg-white/5 rounded-xl border border-white/5">
-                            <span class="text-sm">Imlo va punkt.</span>
-                            <span class="text-indigo-400 font-bold">5 ball</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="statusBox" class="glass-panel p-8 rounded-[2rem] text-center min-h-[200px] flex flex-col justify-center items-center">
+            <div class="lg:col-span-1">
+                <div id="statusCard" class="glass p-8 rounded-[2rem] min-h-[400px] flex flex-col justify-center text-center border-dashed border-slate-800">
                     <div id="idleState">
-                        <i class="fas fa-microchip text-4xl text-slate-700 mb-4"></i>
-                        <p class="text-slate-500 text-sm">Tizim tahlilga tayyor</p>
+                        <div class="w-16 h-16 bg-slate-900 rounded-full flex items-center justify-center mx-auto mb-4 border border-slate-800">
+                            <i class="fas fa-terminal text-indigo-500"></i>
+                        </div>
+                        <p class="text-slate-500 font-medium">Mavzu va matnni kiriting, so'ngra tahlilni bosing</p>
                     </div>
 
                     <div id="loader" class="hidden">
-                        <div class="w-12 h-12 border-2 border-indigo-500 border-t-transparent rounded-full animate-spin mb-4"></div>
-                        <p class="text-indigo-400 text-xs font-bold animate-pulse uppercase tracking-tighter">AI ekspert tahlil qilmoqda</p>
+                        <div class="w-12 h-12 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+                        <p class="text-indigo-400 font-bold animate-pulse">EKSPERT TAHLIL QILMOQDA...</p>
                     </div>
 
-                    <div id="resultContent" class="hidden text-left w-full">
-                        <div class="flex items-center gap-2 text-green-400 mb-4">
-                            <i class="fas fa-check-circle"></i>
-                            <span class="text-xs font-bold uppercase">Xulosa tayyor</span>
+                    <div id="result" class="hidden text-left overflow-y-auto max-h-[600px] pr-2">
                         </div>
-                        <div id="textContent" class="expert-font text-slate-300 text-lg leading-relaxed italic"></div>
-                        <button onclick="window.print()" class="mt-6 w-full py-2 border border-slate-700 rounded-lg text-xs text-slate-500 hover:bg-slate-800 transition-all">PDF SAQLASH</button>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-<script type="module">
-    import { GoogleGenerativeAI } from "https://esm.run/@google/generative-ai";
+    <script type="module">
+        import { GoogleGenerativeAI } from "https://esm.run/@google/generative-ai";
 
-    const API_KEY = "AIzaSyCSjAlYipWXYTUEJnczhpqreOiP3ofG1h0"; 
-    const genAI = new GoogleGenerativeAI(API_KEY);
+        const API_KEY = "AIzaSyCSjAlYipWXYTUEJnczhpqreOiP3ofG1h0"; 
+        const genAI = new GoogleGenerativeAI(API_KEY);
 
-    const checkBtn = document.getElementById('checkBtn');
-    const essayInput = document.getElementById('essayInput');
-    const loader = document.getElementById('loader');
-    const idleState = document.getElementById('idleState');
-    const resultContent = document.getElementById('resultContent');
-    const textContent = document.getElementById('textContent');
+        const checkBtn = document.getElementById('checkBtn');
+        const topicInput = document.getElementById('topicInput');
+        const essayInput = document.getElementById('essayInput');
+        const resultDiv = document.getElementById('result');
+        const loader = document.getElementById('loader');
+        const idleState = document.getElementById('idleState');
 
-    checkBtn.addEventListener('click', async () => {
-        const text = essayInput.value.trim();
-        
-        // So'zlar sonini tekshirish (Milliy sertifikat uchun kamida 150-200 so'z tavsiya etiladi)
-        const wordCount = text.split(/\s+/).filter(word => word.length > 0).length;
+        checkBtn.addEventListener('click', async () => {
+            const topic = topicInput.value.trim();
+            const text = essayInput.value.trim();
 
-        if (wordCount < 50) { 
-            alert("Esse juda qisqa. Iltimos, kamida 50 ta so'z kiriting."); 
-            return; 
-        }
+            if (!topic || text.length < 50) {
+                alert("Iltimos, mavzuni kiriting va kamida 50 ta so'zdan iborat matn yozing!");
+                return;
+            }
 
-        idleState.classList.add('hidden');
-        resultContent.classList.add('hidden');
-        loader.classList.remove('hidden');
-        checkBtn.disabled = true;
+            idleState.classList.add('hidden');
+            resultDiv.classList.add('hidden');
+            loader.classList.remove('hidden');
+            checkBtn.disabled = true;
 
-        try {
-            const model = genAI.getGenerativeModel({ 
-                model: "gemini-1.5-flash",
-                systemInstruction: "Sen O'zbekiston Milliy sertifikat imtihoni (Ona tili va adabiyot) bo'yicha qat'iy ekspertsan. Esseni 15 ballik tizimda bahola: Mavzu (4), Mantiq (3), Imlo (3), Punktuatsiya (2), Uslub (3). Har bir xatoni ko'rsat va tavsiyalar ber."
-            });
+            try {
+                const model = genAI.getGenerativeModel({ 
+                    model: "gemini-1.5-flash",
+                    systemInstruction: "Sen O'zbekiston Milliy sertifikat imtihoni (Ona tili) bo'yicha yuqori malakali ekspertsan. Foydalanuvchi bergan MAVZUga matn qanchalik mosligini 4 ballik tizimda, qolgan mezonlarni (mantiq, imlo, punktuatsiya, uslub) esa jami 11 ballik tizimda, jami 15 ball asosida qat'iy tekshir."
+                });
 
-            const result = await model.generateContent(text);
-            const response = await result.response;
-            const output = response.text();
-            
-            // Markdown formatini HTMLga o'tkazish
-            textContent.innerHTML = output
-                .replace(/\n/g, '<br>')
-                .replace(/\*\*(.*?)\*\*/g, '<b class="text-indigo-400">$1</b>')
-                .replace(/### (.*?)(<br>|$)/g, '<h3 class="text-xl font-bold text-white mt-4">$1</h3>');
-            
-            loader.classList.add('hidden');
-            resultContent.classList.remove('hidden');
-        } catch (error) {
-            console.error(error);
-            alert("Xatolik: API ulanmadi yoki matn juda uzun. Sahifani yangilab qaytadan urinib ko'ring.");
-            idleState.classList.remove('hidden');
-            loader.classList.add('hidden');
-        } finally {
-            checkBtn.disabled = false;
-        }
-    });
-</script>
+                const prompt = `Mavzu: ${topic}\n\nEsse matni: ${text}`;
+                const result = await model.generateContent(prompt);
+                const response = await result.response;
+                
+                resultDiv.innerHTML = `
+                    <div class="flex items-center gap-2 text-green-500 font-bold mb-4 border-b border-slate-800 pb-2">
+                        <i class="fas fa-check-double text-sm"></i> TAHLIL YAKUNLANDI
+                    </div>
+                    <div class="text-slate-300 text-md leading-relaxed">
+                        ${response.text().replace(/\n/g, '<br>').replace(/\*\*(.*?)\*\*/g, '<strong class="text-white">$1</strong>')}
+                    </div>
+                `;
+                
+                loader.classList.add('hidden');
+                resultDiv.classList.remove('hidden');
+            } catch (error) {
+                alert("Xatolik: API ulanishda muammo bo'ldi. Internetni tekshiring.");
+                loader.classList.add('hidden');
+                idleState.classList.remove('hidden');
+            } finally {
+                checkBtn.disabled = false;
+            }
+        });
+    </script>
 </body>
 </html>
