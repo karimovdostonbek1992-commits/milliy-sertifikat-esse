@@ -3,53 +3,119 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EsseLab AI - Milliy Sertifikat Eksperti</title>
+    <title>EsseLab Pro - Ekspert Tahlil Tizimi</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap');
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #f0f2f5; }
-        .glass { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); }
+        @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital@1&family=Montserrat:wght@400;600;700;800&display=swap');
+        
+        body { 
+            font-family: 'Montserrat', sans-serif; 
+            background: #0f172a; 
+            color: #f8fafc;
+        }
+        .expert-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .essay-area {
+            background: #1e293b;
+            border: 1px solid #334155;
+            color: #e2e8f0;
+            transition: all 0.3s ease;
+        }
+        .essay-area:focus {
+            border-color: #6366f1;
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.2);
+        }
+        .result-box {
+            font-family: 'Libre Baskerville', serif;
+            line-height: 1.8;
+            border-left: 4px solid #6366f1;
+        }
     </style>
 </head>
-<body class="min-h-screen p-4 md:p-8">
-    <div class="max-w-4xl mx-auto glass shadow-2xl rounded-[2.5rem] overflow-hidden border border-white">
-        <div class="bg-gradient-to-r from-indigo-700 to-blue-600 p-8 text-white text-center">
-            <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight mb-2">📝 EsseLab AI</h1>
-            <p class="text-indigo-100 opacity-90 italic">Milliy sertifikat (Ona tili) uchun maxsus tahlil tizimi</p>
-        </div>
-        
-        <div class="p-6 md:p-10">
-            <div class="mb-6">
-                <label class="block text-indigo-900 font-bold mb-3 text-lg flex items-center gap-2">
-                    <i class="fas fa-pen-nib"></i> Esse matnini kiriting:
-                </label>
-                <textarea id="essayInput" rows="12" class="w-full p-6 border-2 border-indigo-50 rounded-3xl focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100 outline-none transition-all text-gray-700 text-lg shadow-inner bg-slate-50/50" placeholder="Bu yerga esseingizni joylang..."></textarea>
+<body class="min-h-screen">
+    <div class="max-w-6xl mx-auto px-4 py-12">
+        <header class="text-center mb-16">
+            <div class="inline-block px-4 py-1 border border-indigo-500/30 rounded-full text-indigo-400 text-xs font-bold tracking-widest uppercase mb-4">
+                AI Powered Assessment System
             </div>
-            
-            <button id="checkBtn" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-black py-5 rounded-2xl shadow-xl shadow-indigo-200 transition-all transform hover:-translate-y-1 active:scale-95 flex items-center justify-center gap-4 text-xl">
-                <span>🚀 TAHLIL QILISH</span>
-            </button>
+            <h1 class="text-4xl md:text-5xl font-extrabold mb-4 tracking-tight">
+                ESSE<span class="text-indigo-500 text-6xl">.</span>LAB <span class="text-indigo-500">PRO</span>
+            </h1>
+            <p class="text-slate-400 max-w-2xl mx-auto text-lg">
+                Milliy sertifikat talablari asosida filologik tahlil va avtomatlashtirilgan baholash platformasi.
+            </p>
+        </header>
 
-            <div id="loader" class="hidden mt-12 text-center p-10 bg-indigo-50/30 rounded-3xl border border-dashed border-indigo-200 animate-pulse">
-                <div class="inline-block animate-spin rounded-full h-12 w-12 border-4 border-indigo-600 border-t-transparent mb-4"></div>
-                <p class="text-indigo-900 font-bold text-lg italic tracking-wide">Ekspert tahlil o'tkazmoqda...</p>
-                <p class="text-indigo-400 text-sm mt-1">Bu 10-20 soniya vaqt olishi mumkin</p>
-            </div>
-
-            <div id="result" class="hidden mt-12 p-8 bg-white rounded-3xl border-2 border-indigo-50 border-l-[12px] border-l-indigo-600 shadow-xl text-gray-800 leading-relaxed text-lg animate-fadeIn">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            <div class="lg:col-span-7 space-y-6">
+                <div class="expert-card p-8 rounded-3xl shadow-2xl">
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-xl font-bold flex items-center gap-3">
+                            <i class="fas fa-scroll text-indigo-500"></i> Matn tahlili
+                        </h2>
+                        <span id="charCount" class="text-xs text-slate-500 font-mono">0 so'z</span>
+                    </div>
+                    
+                    <textarea id="essayInput" 
+                        class="essay-area w-full p-6 rounded-2xl outline-none resize-none text-lg min-h-[450px]" 
+                        placeholder="Esse matnini ushbu maydonga kiriting..."></textarea>
+                    
+                    <button id="checkBtn" 
+                        class="w-full mt-6 bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-5 rounded-2xl transition-all flex items-center justify-center gap-3 shadow-lg shadow-indigo-500/20 active:scale-95">
+                        <span>TAHLILNI BOSHLASH</span>
+                        <i class="fas fa-chevron-right text-sm"></i>
+                    </button>
                 </div>
+            </div>
+
+            <div class="lg:col-span-5 space-y-6">
+                <div id="statusPlaceholder" class="expert-card p-8 rounded-3xl border-dashed border-slate-700 text-center py-20">
+                    <i class="fas fa-fingerprint text-5xl text-slate-700 mb-4"></i>
+                    <p class="text-slate-500 font-medium">Tizim tahlilga tayyor...</p>
+                </div>
+
+                <div id="loader" class="hidden expert-card p-10 rounded-3xl text-center">
+                    <div class="flex justify-center mb-6">
+                        <div class="w-12 h-12 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin"></div>
+                    </div>
+                    <p class="text-indigo-400 font-bold animate-pulse">LINGVISTIK TAHLIL KETMOQDA...</p>
+                </div>
+
+                <div id="result" class="hidden expert-card p-8 rounded-3xl animate-fadeIn overflow-hidden">
+                    </div>
+
+                <div class="expert-card p-6 rounded-3xl">
+                    <h3 class="text-sm font-bold text-slate-400 uppercase tracking-widest mb-4">Baholash Mezonlari</h3>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="bg-slate-800/50 p-3 rounded-xl border border-slate-700">
+                            <span class="block text-indigo-400 font-bold text-xl">4</span>
+                            <span class="text-[10px] uppercase text-slate-500">Mavzu dolzarbligi</span>
+                        </div>
+                        <div class="bg-slate-800/50 p-3 rounded-xl border border-slate-700">
+                            <span class="block text-indigo-400 font-bold text-xl">3</span>
+                            <span class="text-[10px] uppercase text-slate-500">Mantiqiy izchillik</span>
+                        </div>
+                        <div class="bg-slate-800/50 p-3 rounded-xl border border-slate-700">
+                            <span class="block text-indigo-400 font-bold text-xl">3</span>
+                            <span class="text-[10px] uppercase text-slate-500">Imlo va lug'at</span>
+                        </div>
+                        <div class="bg-slate-800/50 p-3 rounded-xl border border-slate-700">
+                            <span class="block text-indigo-400 font-bold text-xl">5</span>
+                            <span class="text-[10px] uppercase text-slate-500">Punkt. va Uslub</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-
-    <footer class="mt-8 text-center text-gray-400 text-sm">
-        &copy; 2026 EsseLab AI. Barcha huquqlar himoyalangan.
-    </footer>
 
     <script type="module">
         import { GoogleGenerativeAI } from "https://esm.run/@google/generative-ai";
 
-        // SIZNING API KALITINGIZ:
         const API_KEY = "AIzaSyCSjAlYipWXYTUEJnczhpqreOiP3ofG1h0"; 
         const genAI = new GoogleGenerativeAI(API_KEY);
 
@@ -57,14 +123,21 @@
         const essayInput = document.getElementById('essayInput');
         const resultDiv = document.getElementById('result');
         const loader = document.getElementById('loader');
+        const statusPlaceholder = document.getElementById('statusPlaceholder');
+
+        essayInput.addEventListener('input', (e) => {
+            const words = e.target.value.trim().split(/\s+/).filter(x => x).length;
+            document.getElementById('charCount').innerText = words + " so'z";
+        });
 
         checkBtn.addEventListener('click', async () => {
             const text = essayInput.value.trim();
             if (text.length < 50) {
-                alert("Iltimos, kamida 50 ta so'zdan iborat esse matnini kiriting!");
+                alert("Tahlil uchun kamida 50 ta so'z kiriting.");
                 return;
             }
 
+            statusPlaceholder.classList.add('hidden');
             loader.classList.remove('hidden');
             resultDiv.classList.add('hidden');
             checkBtn.disabled = true;
@@ -72,22 +145,32 @@
             try {
                 const model = genAI.getGenerativeModel({ 
                     model: "gemini-1.5-flash",
-                    systemInstruction: "Sen O'zbekiston Milliy sertifikat (Ona tili) imtihoni bo'yicha ekspertsan. Foydalanuvchi yozgan esseni quyidagi 15 ballik tizimda qat'iy tekshir: 1. Mavzu (4), 2. Mantiq (3), 3. Imlo (3), 4. Punktuatsiya (2), 5. Uslub (3). Har bir xatoni bittalab ko'rsat va tuzatilgan variantini ber. Oxirida ballarni asoslab ber."
+                    systemInstruction: "Sen O'zbekiston Milliy sertifikat imtihoni bo'yicha yuqori malakali filolog-ekspertsan. Esse matnini juda qat'iy va professional tahlil qil. Ballarni har bir mezon bo'yicha alohida ko'rsat (Jami 15 ball). Xatolarni ilmiy tilda tushuntir. Natijani rasmiy xulosa shaklida taqdim et."
                 });
 
                 const result = await model.generateContent(text);
                 const response = await result.response;
                 
-                // Markdown formatini chiroyliroq qilish
-                let formattedText = response.text()
+                let htmlContent = response.text()
                     .replace(/\n/g, '<br>')
-                    .replace(/\*\*(.*?)\*\*/g, '<strong class="text-indigo-700">$1</strong>');
+                    .replace(/\*\*(.*?)\*\*/g, '<strong class="text-indigo-400">$1</strong>')
+                    .replace(/### (.*?)(<br>|$)/g, '<h4 class="text-xl font-bold text-white mt-4 mb-2">$1</h4>');
                 
-                resultDiv.innerHTML = `<h3 class="text-2xl font-bold text-indigo-900 mb-6 border-b pb-4"><i class="fas fa-clipboard-check text-green-500"></i> Ekspert xulosasi:</h3>` + formattedText;
+                resultDiv.innerHTML = `
+                    <div class="flex items-center gap-2 text-green-500 mb-6 font-bold">
+                        <div class="w-2 h-2 bg-green-500 rounded-full animate-ping"></div>
+                        EKSPERT XULOSASI TAYYOR
+                    </div>
+                    <div class="result-box text-slate-300 pr-2">
+                        ${htmlContent}
+                    </div>
+                    <button onclick="window.print()" class="mt-8 w-full border border-slate-700 py-3 rounded-xl text-slate-400 text-sm hover:bg-slate-800 transition-all">
+                        <i class="fas fa-print mr-2"></i> NATIJANI SAQLASH (PDF)
+                    </button>
+                `;
                 resultDiv.classList.remove('hidden');
-                resultDiv.scrollIntoView({ behavior: 'smooth' });
             } catch (error) {
-                resultDiv.innerHTML = `<p class="text-red-500 font-bold text-center">Xatolik: Internet aloqasi yoki API bilan muammo yuz berdi.</p>`;
+                resultDiv.innerHTML = `<p class="text-red-400">Tizimda xatolik yuz berdi. API kalit yoki internetni tekshiring.</p>`;
                 resultDiv.classList.remove('hidden');
             } finally {
                 loader.classList.add('hidden');
