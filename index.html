@@ -3,151 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EsseLab Pro - Ekspert Tahlili</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>EssayLab AI Pro</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap');
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #020617; color: white; scroll-behavior: smooth; }
-        .glass { background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.05); }
-        .input-style { background: #0f172a; border: 1px solid #1e293b; color: #e2e8f0; transition: all 0.3s; }
-        .input-style:focus { border-color: #6366f1; box-shadow: 0 0 15px rgba(99, 102, 241, 0.2); outline: none; }
-        .criterion-card { border-left: 4px solid #6366f1; background: rgba(99, 102, 241, 0.05); transition: 0.3s; }
-        .criterion-card:hover { background: rgba(99, 102, 241, 0.1); }
-    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body class="min-h-screen p-4 md:p-10">
-    <div class="max-w-6xl mx-auto">
-        <div class="mb-10 flex flex-col md:flex-row justify-between items-center gap-4">
-            <div>
-                <h1 class="text-4xl font-extrabold tracking-tighter text-indigo-500">ESSE.LAB PRO</h1>
-                <p class="text-slate-400 text-xs uppercase tracking-[0.3em]">Milliy Sertifikat Standarti v3.0</p>
-            </div>
-            <div class="glass px-6 py-3 rounded-2xl text-center">
-                <p class="text-slate-500 text-[10px] uppercase font-bold">Maksimal Ball</p>
-                <p class="text-2xl font-black text-white">15 BALL</p>
-            </div>
-        </div>
+<body class="mode-uz" id="mainBody">
 
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-            <div class="lg:col-span-8 space-y-6">
-                <div class="glass p-8 rounded-[2.5rem] shadow-2xl">
-                    <div class="mb-6 text-center lg:text-left">
-                        <label class="block text-indigo-400 text-xs font-bold uppercase mb-2 ml-1 tracking-widest">Esse Mavzusi</label>
-                        <input id="topicInput" type="text" class="input-style w-full p-4 rounded-xl text-md" placeholder="Masalan: Kitobxonlik - inson ma'naviy kamolotining asosi">
-                    </div>
+    <button id="menuBtn" class="fixed top-5 left-5 z-[3000] p-3 glass-nav-btn text-xl no-print">
+        <i class="fas fa-bars"></i>
+    </button>
 
-                    <div class="mb-6">
-                        <label class="block text-indigo-400 text-xs font-bold uppercase mb-2 ml-1 tracking-widest">Esse Matni</label>
-                        <textarea id="essayInput" class="input-style w-full h-[400px] p-6 rounded-2xl text-lg resize-none leading-relaxed" placeholder="Esse matnini bu yerga joylang..."></textarea>
-                    </div>
-                    
-                    <button id="checkBtn" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-5 rounded-2xl transition-all flex items-center justify-center gap-4 active:scale-95 text-xl shadow-xl shadow-indigo-600/20">
-                        <span>TAHLILNI BOSHLASH</span>
-                        <i class="fas fa-microchip"></i>
-                    </button>
-                </div>
-
-                <div id="resultBox" class="hidden glass p-8 rounded-[2.5rem] border-t-4 border-indigo-500 mt-10">
-                    <div class="flex items-center justify-between mb-8 border-b border-white/10 pb-4">
-                        <h2 class="text-2xl font-bold flex items-center gap-3 italic">
-                            <i class="fas fa-file-contract text-indigo-500"></i> EKSPERT XULOSASI
-                        </h2>
-                    </div>
-                    <div id="resultContent" class="text-slate-200 leading-relaxed space-y-4 text-lg">
-                        </div>
-                </div>
-            </div>
-
-            <div class="lg:col-span-4 space-y-6">
-                <div class="glass p-6 rounded-[2rem] sticky top-10">
-                    <h3 class="text-xs font-black text-white uppercase mb-6 tracking-widest flex items-center gap-2">
-                        <i class="fas fa-list-check text-indigo-500"></i> Baholash Mezonlari
-                    </h3>
-                    <div class="space-y-3">
-                        <div class="criterion-card p-3 rounded-r-xl">
-                            <p class="font-bold text-sm text-indigo-300">1. Mavzu (4 ball)</p>
-                            <p class="text-[11px] text-slate-500">Mavzuning ochilishi va dalillar.</p>
-                        </div>
-                        <div class="criterion-card p-3 rounded-r-xl">
-                            <p class="font-bold text-sm text-indigo-300">2. Mantiqiylik (3 ball)</p>
-                            <p class="text-[11px] text-slate-500">Fikrlar izchilligi va bog'liqlik.</p>
-                        </div>
-                        <div class="criterion-card p-3 rounded-r-xl">
-                            <p class="font-bold text-sm text-indigo-300">3. Imlo (3 ball)</p>
-                            <p class="text-[11px] text-slate-500">Xatolar va so'z boyligi.</p>
-                        </div>
-                        <div class="criterion-card p-3 rounded-r-xl">
-                            <p class="font-bold text-sm text-indigo-300">4. Punktuatsiya (2 ball)</p>
-                            <p class="text-[11px] text-slate-500">Tinish belgilari.</p>
-                        </div>
-                        <div class="criterion-card p-3 rounded-r-xl">
-                            <p class="font-bold text-sm text-indigo-300">5. Uslub (3 ball)</p>
-                            <p class="text-[11px] text-slate-500">Gap qurilishi va uslub.</p>
-                        </div>
-                    </div>
-
-                    <div id="loader" class="hidden mt-8 text-center p-6 bg-indigo-500/5 rounded-2xl border border-indigo-500/10">
-                        <div class="w-10 h-10 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-                        <p class="text-indigo-400 font-bold animate-pulse text-[10px] uppercase">Ekspert matnni tahlil qilmoqda...</p>
-                    </div>
-                </div>
-            </div>
+    <div id="sidebar" class="fixed inset-y-0 left-0 w-72 bg-[#020c1b] z-[2500] transform -translate-x-full transition-transform duration-300 border-r border-white/10 backdrop-blur-xl">
+        <div class="p-8 pt-24">
+            <h2 class="text-2xl font-black theme-text italic mb-10 tracking-tighter">EssayLab AI</h2>
+            <nav class="space-y-4">
+                <button onclick="switchTab('writing')" class="w-full text-left p-4 rounded-xl hover:bg-white/5 transition flex items-center gap-4 text-white">
+                    <i class="fas fa-pen-nib theme-text"></i> <span class="font-bold">Writing (Esse)</span>
+                </button>
+                <button onclick="switchTab('speaking')" class="w-full text-left p-4 rounded-xl hover:bg-white/5 transition flex items-center gap-4 text-white">
+                    <i class="fas fa-microphone theme-text"></i> <span class="font-bold">Speaking (AI Coach)</span>
+                </button>
+            </nav>
         </div>
     </div>
 
-    <script type="module">
-        import { GoogleGenerativeAI } from "https://esm.run/@google/generative-ai";
+    <div class="nav-container no-print">
+        <button onclick="toggleTheme()" id="themeToggleBtn" class="glass-nav-btn">
+            <i id="themeIcon" class="fas fa-moon text-yellow-400"></i>
+        </button>
+        <div class="lang-wrapper">
+            <button onclick="setMode('uz')" id="btnUz" class="glass-nav-btn">UZ</button>
+            <button onclick="setMode('en')" id="btnEn" class="glass-nav-btn">EN</button>
+            <button onclick="setMode('ru')" id="btnRu" class="glass-nav-btn">RU</button>
+        </div>
+    </div>
 
-        const API_KEY = "AIzaSyCSjAlYipWXYTUEJnczhpqreOiP3ofG1h0"; 
-        const genAI = new GoogleGenerativeAI(API_KEY);
+    <div id="authModal" class="fixed inset-0 z-[4000] flex items-center justify-center bg-black/95 backdrop-blur-2xl p-4">
+        <div class="glass-card p-10 max-w-md w-full border-t-4 border-[var(--t-color)] text-center">
+            <h1 class="text-4xl font-black mb-6 tracking-tighter theme-text">EssayLab AI</h1>
+            <div class="space-y-4 mb-8">
+                <input id="regName" type="text" placeholder="Ism va Familiya" class="w-full p-4 rounded-xl">
+                <input id="regAlias" type="text" placeholder="Username" class="w-full p-4 rounded-xl">
+                <input id="regEmail" type="email" placeholder="Email (user@gmail.com)" class="w-full p-4 rounded-xl">
+            </div>
+            <button onclick="registerUser()" class="w-full neon-glow py-4 rounded-xl font-black text-white btn-pulse">KIRISH</button>
+        </div>
+    </div>
 
-        const checkBtn = document.getElementById('checkBtn');
-        const topicInput = document.getElementById('topicInput');
-        const essayInput = document.getElementById('essayInput');
-        const resultBox = document.getElementById('resultBox');
-        const resultContent = document.getElementById('resultContent');
-        const loader = document.getElementById('loader');
+    <main id="mainContent" class="opacity-0 transition-opacity duration-1000 max-w-5xl mx-auto p-4 pt-24">
+        
+        <section id="writingPage" class="content-section space-y-8">
+            <div class="text-center mb-10">
+                <h1 id="mainTitle" class="text-4xl md:text-5xl font-black mb-2">Milliy sertifikat bo'limi</h1>
+                <p id="userTag" class="text-[10px] font-bold opacity-50 tracking-widest uppercase"></p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                <div class="lg:col-span-8 space-y-6">
+                    <div class="glass-card p-6 md:p-10">
+                        <input id="topicInput" type="text" class="w-full p-4 rounded-xl mb-4 font-bold" placeholder="Esse mavzusi...">
+                        <textarea id="essayInput" class="w-full h-80 p-6 rounded-2xl outline-none resize-none mb-6 leading-relaxed" placeholder="Matnni shu yerga yozing..."></textarea>
+                        <div class="flex justify-between items-center">
+                            <div class="theme-text font-black text-xs"><span id="wordCount">0</span> SO'Z</div>
+                            <button id="checkBtn" class="neon-glow px-12 py-4 rounded-2xl font-black text-white">TAHLIL</button>
+                        </div>
+                    </div>
+                    <div id="resultBox" class="hidden glass-card p-8 border-l-[10px] border-[var(--t-color)]">
+                        <div id="resultContent" class="text-lg leading-loose"></div>
+                    </div>
+                </div>
+                <div class="lg:col-span-4">
+                    <div class="glass-card p-6 sticky top-24">
+                        <h3 class="text-[10px] font-black opacity-50 mb-6 tracking-widest uppercase">Baholash Mezonlari</h3>
+                        <div id="criteriaList" class="space-y-3"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        checkBtn.addEventListener('click', async () => {
-            const topic = topicInput.value.trim();
-            const text = essayInput.value.trim();
-
-            if (!topic || text.length < 50) {
-                alert("Mavzuni kiriting va kamida 50 ta so'z yozing!");
-                return;
-            }
-
-            resultBox.classList.add('hidden');
-            loader.classList.remove('hidden');
-            checkBtn.disabled = true;
-
-            try {
-                const model = genAI.getGenerativeModel({ 
-                    model: "gemini-1.5-flash",
-                    systemInstruction: "Sen O'zbekiston Milliy sertifikat (Ona tili) ekspertsan. Esse tahlilida: 1. Ballar jadvali. 2. KAMCHILIKLAR (Matndagi xatolar tushuntirilishi). 3. TUZATISH (Xato gapning to'g'ri varianti). Juda qat'iy va professional bo'l."
-                });
-
-                const prompt = `Mavzu: ${topic}\n\nEsse matni: ${text}`;
-                const result = await model.generateContent(prompt);
-                const response = await result.response;
+        <section id="speakingPage" class="content-section hidden">
+            <div class="glass-card p-10 text-center max-w-2xl mx-auto">
+                <h2 class="text-3xl font-black mb-6 theme-text italic">AI Speaking Coach</h2>
+                <p id="speakingQuestion" class="text-xl font-bold mb-10 opacity-80 italic">"What are the advantages of using technology in education?"</p>
                 
-                resultContent.innerHTML = response.text()
-                    .replace(/\n/g, '<br>')
-                    .replace(/\*\*(.*?)\*\*/g, '<strong class="text-indigo-400">$1</strong>')
-                    .replace(/### (.*?)(<br>|$)/g, '<h3 class="text-xl font-bold text-white mt-6 mb-2 border-b border-indigo-500/20 pb-2">$1</h3>');
+                <div class="relative inline-block mb-10">
+                    <div id="micRipple" class="absolute inset-0 bg-[var(--t-color)] rounded-full opacity-0"></div>
+                    <button id="recordBtn" class="relative z-10 w-28 h-28 rounded-full neon-glow flex items-center justify-center text-4xl text-white">
+                        <i class="fas fa-microphone"></i>
+                    </button>
+                </div>
                 
-                loader.classList.add('hidden');
-                resultBox.classList.remove('hidden');
-                resultBox.scrollIntoView({ behavior: 'smooth' });
-            } catch (error) {
-                console.error(error);
-                alert("Xatolik: API ulanmadi. Iltimos, VPN yoqib ko'ring yoki birozdan so'ng urinib ko'ring.");
-                loader.classList.add('hidden');
-            } finally {
-                checkBtn.disabled = false;
-            }
-        });
-    </script>
+                <div id="recordingStatus" class="font-black text-xs tracking-widest opacity-50 uppercase mb-6">Tugmani bosing va gapiring</div>
+                
+                <div id="speakingResult" class="hidden glass-card p-8 text-left border-t-4 border-[var(--t-color)]">
+                    <p id="transcript" class="italic opacity-60 mb-6 border-b border-white/10 pb-4"></p>
+                    <div id="speakingFeedback" class="text-lg leading-relaxed"></div>
+                </div>
+            </div>
+        </section>
+
+        <div id="loader" class="hidden fixed inset-0 z-[5000] flex flex-col items-center justify-center bg-black/60 backdrop-blur-sm">
+            <div class="w-16 h-16 border-4 border-[var(--t-color)] border-t-transparent rounded-full animate-spin mb-4"></div>
+            <p class="theme-text font-black tracking-widest">AI TAHLIL QILMOQDA...</p>
+        </div>
+    </main>
+
+    <script src="app.js"></script>
 </body>
 </html>
